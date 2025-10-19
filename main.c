@@ -627,59 +627,59 @@ void gameOver()
 	int n;
 	lostDraw();
 
+	color(12);
+	gotoxy(38, 9);
+
+	//不同的状态 显示不同失败提示 endStatus
+	switch (endgame)
+	{
+	case HITWALL:
+		printf("您撞到墙了，游戏结束!!!");
+		break;
+	case HITSELF:
+		printf("您咬到蛇身了，游戏结束!!!");
+		break;
+	case ESC:
+		printf("您已经结束了游戏，游戏结束!!!");
+		break;
+	}
+
+	//显示得分
+	color(13);
+	gotoxy(43, 12);
+	printf("您的得分: %d", score);
+
+	//显示最高分
+	if (score > highestscore)
+	{
+		color(10);
+		gotoxy(38, 16);
+		printf("恭喜你，您已经破纪录了。");
+
+		//将最高分写入文件
+		saveScore();
+	}
+	else
+	{
+		color(10);
+		gotoxy(38, 16);
+		printf("加油哦， 离最高分还差%d分", highestscore - score);
+	}
+
+	//结束后的选择
+	gotoxy(25, 23);
+	color(12);
+	printf("再玩一局请输入：1");
+
+	gotoxy(52, 23);
+	printf("直接退出请输入：2");
+
+	gotoxy(46, 25);
+	color(11);
+	printf("请选择: ");
+
 	while (1)
 	{
-		color(12);
-		gotoxy(38, 9);
-
-		//不同的状态 显示不同失败提示 endStatus
-		switch (endgame)
-		{
-		case HITWALL:
-			printf("您撞到墙了，游戏结束!!!");
-			break;
-		case HITSELF:
-			printf("您咬到蛇身了，游戏结束!!!");
-			break;
-		case ESC:
-			printf("您已经结束了游戏，游戏结束!!!");
-			break;
-		}
-
-		//显示得分
-		color(13);
-		gotoxy(43, 12);
-		printf("您的得分: %d", score);
-
-		//显示最高分
-		if (score > highestscore)
-		{
-			color(10);
-			gotoxy(38, 16);
-			printf("恭喜你，您已经破纪录了。");
-
-			//将最高分写入文件
-			saveScore();
-		}
-		else
-		{
-			color(10);
-			gotoxy(38, 16);
-			printf("加油哦， 离最高分还差%d分", highestscore - score);
-		}
-
-		//结束后的选择
-		gotoxy(25, 23);
-		color(12);
-		printf("再玩一局请输入：1");
-
-		gotoxy(52, 23);
-		printf("直接退出请输入：2");
-
-		gotoxy(46, 25);
-		color(11);
-		printf("请选择: ");
-
 		scanf("%d", &n);
 		getchar();
 
